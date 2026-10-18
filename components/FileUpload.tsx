@@ -58,8 +58,15 @@ export function FileUpload({ onParsed }: Props) {
           {loaded ?? 'Drop your manifest file here'}
         </p>
         <p className="text-sm text-gray-500">
-          {loaded ? 'Drop another file to rescan' : `Supports: ${SUPPORTED_FILES.join(', ')}`}
+          {loaded
+            ? 'Drop another file to rescan'
+            : 'npm · Maven · PyPI · Go · Rust · Ruby · PHP · .NET'}
         </p>
+        {!loaded && (
+          <p className="mt-1 text-xs text-gray-600">
+            package.json · package-lock.json · yarn.lock · pom.xml · build.gradle · requirements.txt · poetry.lock · go.mod · Cargo.toml · Gemfile.lock · composer.lock · *.csproj
+          </p>
+        )}
       </label>
       {error && (
         <p className="mt-2 rounded bg-red-950 px-3 py-2 text-sm text-red-400">{error}</p>

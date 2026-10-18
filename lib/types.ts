@@ -1,7 +1,8 @@
 export interface Component {
-  ecosystem: 'npm' | 'Maven' | 'PyPI' | 'Go' | 'crates.io'
+  ecosystem: 'npm' | 'Maven' | 'PyPI' | 'Go' | 'crates.io' | 'RubyGems' | 'Packagist' | 'NuGet' | 'Pub'
   name: string
   version: string
+  isDirect?: boolean
 }
 
 export interface VulnResult {
