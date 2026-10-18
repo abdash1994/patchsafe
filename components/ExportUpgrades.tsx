@@ -153,7 +153,7 @@ export function ExportUpgrades({ results }: Props) {
       {/* Expandable code block */}
       {open && (
         <div className="border-t border-white/6 fade-up">
-          <pre className="overflow-x-auto px-5 py-4 text-xs leading-relaxed text-slate-300 font-mono whitespace-pre">
+          <pre className="overflow-x-auto px-5 py-4 text-xs leading-relaxed font-mono whitespace-pre" style={{ color: 'var(--text-secondary)' }}>
             {commands}
           </pre>
         </div>

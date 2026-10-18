@@ -160,7 +160,7 @@ export function ResultsTable({ results }: Props) {
           </svg>
           <input type="text" placeholder="Filter by component or CVE…" value={filter}
             onChange={e => setFilter(e.target.value)}
-            className="w-full glass rounded-lg pl-9 pr-4 py-2 text-sm text-slate-200 placeholder-slate-600 outline-none focus:border-indigo-500/50 transition-colors" />
+            className="w-full glass-input rounded-lg pl-9 pr-4 py-2 text-sm outline-none" />
         </div>
         {kevCount > 0 && (
           <button onClick={() => setKevOnly(v => !v)}
@@ -213,10 +213,10 @@ export function ResultsTable({ results }: Props) {
           </tbody>
         </table>
         {sorted.length === 0 && (
-          <div className="py-12 text-center text-sm text-slate-600">No vulnerabilities match the filter.</div>
+          <div className="py-12 text-center text-sm" style={{ color: 'var(--text-muted)' }}>No vulnerabilities match the filter.</div>
         )}
       </div>
-      <p className="text-xs text-slate-700 text-center">Click any row to see CVE details, description, and fix version link</p>
+      <p className="text-xs text-center" style={{ color: 'var(--text-dim)' }}>Click any row to see CVE details, description, and fix version link</p>
     </div>
   )
 }

@@ -1,29 +1,34 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
+import type { Metadata } from 'next'
+import { Geist, Geist_Mono } from 'next/font/google'
+import './globals.css'
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
+const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: "VulnScanner — Dependency Vulnerability Checker",
-  description: "Upload a manifest file and instantly see which dependencies are vulnerable, why, and what version fixes it.",
-};
+  title: 'VulnScanner — Dependency Vulnerability Checker',
+  description: 'Drop a dependency manifest. Instantly see which packages are vulnerable, the CVE, CVSS score, exploit probability, and the exact fix version.',
+}
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+// Injected before React hydrates — prevents flash of wrong theme
+const themeScript = `
+(function(){
+  try {
+    var t = localStorage.getItem('vs-theme');
+    if (t === 'light') document.documentElement.setAttribute('data-theme','light');
+  } catch(e){}
+})();
+`
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html
-      lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
-    >
-      <body className="min-h-full flex flex-col bg-gray-950 text-white">{children}</body>
+    <html lang="en" className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
+      <body className="min-h-full flex flex-col" style={{ background: 'var(--bg-base)', color: 'var(--text-primary)' }}>
+        {children}
+      </body>
     </html>
-  );
+  )
 }
