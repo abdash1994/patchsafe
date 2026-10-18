@@ -1,4 +1,4 @@
-const EPSS_URL = 'https://api.first.org/data/1.0/epss'
+const EPSS_URL = 'https://api.first.org/data/v1/epss'
 const BATCH_SIZE = 100
 
 export async function fetchEpss(cveIds: string[]): Promise<Map<string, number>> {
