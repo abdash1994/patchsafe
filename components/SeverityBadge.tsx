@@ -1,24 +1,20 @@
 'use client'
 
-interface Props {
-  severity: number
-  label: string
-}
+interface Props { severity: number; label: string }
 
-const colorMap: Record<string, string> = {
-  Critical: 'bg-red-600 text-white',
-  High: 'bg-orange-500 text-white',
-  Medium: 'bg-yellow-400 text-gray-900',
-  Low: 'bg-green-500 text-white',
-  Unknown: 'bg-gray-600 text-gray-200',
+const style: Record<string, string> = {
+  Critical: 'bg-red-500/15 text-red-400 ring-1 ring-red-500/30',
+  High:     'bg-orange-500/15 text-orange-400 ring-1 ring-orange-500/30',
+  Medium:   'bg-yellow-500/15 text-yellow-400 ring-1 ring-yellow-500/30',
+  Low:      'bg-green-500/15 text-green-400 ring-1 ring-green-500/30',
+  Unknown:  'bg-slate-500/15 text-slate-400 ring-1 ring-slate-500/30',
 }
 
 export function SeverityBadge({ severity, label }: Props) {
-  const cls = colorMap[label] ?? colorMap.Unknown
   return (
-    <span className={`inline-flex items-center gap-1 rounded px-2 py-0.5 text-xs font-semibold ${cls}`}>
+    <span className={`inline-flex items-center gap-1.5 rounded-md px-2 py-0.5 text-xs font-semibold ${style[label] ?? style.Unknown}`}>
       {label}
-      {severity > 0 && <span className="opacity-80">({severity.toFixed(1)})</span>}
+      {severity > 0 && <span className="opacity-60 font-normal">{severity.toFixed(1)}</span>}
     </span>
   )
 }
