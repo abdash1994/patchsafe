@@ -6,6 +6,36 @@ import { SeverityBadge } from './SeverityBadge'
 
 interface Props { results: VulnResult[] }
 type SortKey = 'severity' | 'name' | 'cveId' | 'epss'
+
+function registryUrl(ecosystem: VulnResult['ecosystem'], name: string, version: string): string | null {
+  switch (ecosystem) {
+    case 'npm':
+      return `https://www.npmjs.com/package/${name}/v/${version}`
+    case 'Maven': {
+      // name is "groupId:artifactId"
+      const [groupId, artifactId] = name.split(':')
+      if (!groupId || !artifactId) return null
+      const groupPath = groupId.replace(/\./g, '/')
+      return `https://repo1.maven.org/maven2/${groupPath}/${artifactId}/${version}/`
+    }
+    case 'PyPI':
+      return `https://pypi.org/project/${name}/${version}/`
+    case 'Go':
+      return `https://pkg.go.dev/${name}@${version}`
+    case 'crates.io':
+      return `https://crates.io/crates/${name}/${version}`
+    case 'RubyGems':
+      return `https://rubygems.org/gems/${name}/versions/${version}`
+    case 'Packagist':
+      return `https://packagist.org/packages/${name}#${version}`
+    case 'NuGet':
+      return `https://www.nuget.org/packages/${name}/${version}`
+    case 'Pub':
+      return `https://pub.dev/packages/${name}/versions/${version}`
+    default:
+      return null
+  }
+}
 type SortDir = 'asc' | 'desc'
 
 const rowAccent: Record<string, string> = {
@@ -145,9 +175,25 @@ export function ResultsTable({ results }: Props) {
                 </td>
                 <td className="px-3 py-3 text-xs text-slate-400 max-w-xs">{r.description || '—'}</td>
                 <td className="px-3 py-3 whitespace-nowrap">
-                  {r.fixVersion
-                    ? <span className="font-mono text-xs text-emerald-400 bg-emerald-400/10 rounded px-1.5 py-0.5">{r.fixVersion}</span>
-                    : <span className="text-slate-700">—</span>}
+                  {r.fixVersion ? (() => {
+                    const url = registryUrl(r.ecosystem, r.name, r.fixVersion)
+                    return url ? (
+                      <a
+                        href={url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        title={`Download ${r.name}@${r.fixVersion} from official registry`}
+                        className="inline-flex items-center gap-1 font-mono text-xs text-emerald-400 bg-emerald-400/10 rounded px-1.5 py-0.5 hover:bg-emerald-400/20 hover:text-emerald-300 transition-colors"
+                      >
+                        {r.fixVersion}
+                        <svg className="h-2.5 w-2.5 opacity-60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                        </svg>
+                      </a>
+                    ) : (
+                      <span className="font-mono text-xs text-emerald-400 bg-emerald-400/10 rounded px-1.5 py-0.5">{r.fixVersion}</span>
+                    )
+                  })() : <span className="text-slate-700">—</span>}
                 </td>
                 <td className="px-3 py-3">
                   {r.kev

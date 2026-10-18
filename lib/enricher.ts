@@ -29,6 +29,7 @@ export async function enrich(components: Component[]): Promise<VulnResult[]> {
   const results: VulnResult[] = osvHits.map(hit => ({
     name: hit.component.name,
     version: hit.component.version,
+    ecosystem: hit.component.ecosystem,
     cveId: hit.cveId,
     severity: hit.severity,
     severityLabel: severityLabel(hit.severity),

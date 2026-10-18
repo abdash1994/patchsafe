@@ -8,6 +8,7 @@ export interface Component {
 export interface VulnResult {
   name: string
   version: string
+  ecosystem: Component['ecosystem']
   cveId: string
   severity: number
   severityLabel: 'Critical' | 'High' | 'Medium' | 'Low' | 'Unknown'

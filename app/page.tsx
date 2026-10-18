@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { FileUpload } from '@/components/FileUpload'
 import { ResultsTable } from '@/components/ResultsTable'
 import { SummaryBar } from '@/components/SummaryBar'
+import { ExportUpgrades } from '@/components/ExportUpgrades'
 import type { Component, VulnResult } from '@/lib/types'
 
 type State = 'idle' | 'ready' | 'scanning' | 'done' | 'error'
@@ -206,6 +207,7 @@ export default function Home() {
             ) : (
               <>
                 <SummaryBar results={results} />
+                <ExportUpgrades results={results} />
                 <ResultsTable results={results} />
               </>
             )}
