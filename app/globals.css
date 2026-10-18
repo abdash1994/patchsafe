@@ -210,6 +210,95 @@ body {
   border-color: var(--glass-border-h);
 }
 
-/* ── Table row hover ── */
-.table-row-hover:hover { background: var(--row-hover) !important; }
-.table-divider { border-color: var(--divider) !important; }
+/* ── Theme-aware text utilities ── */
+.t-1 { color: var(--text-primary); }
+.t-2 { color: var(--text-secondary); }
+.t-m { color: var(--text-muted); }
+.t-d { color: var(--text-dim); }
+.t-1:hover { color: var(--text-primary); }
+
+/* ── Theme-aware surface utilities ── */
+.row-base  { border-bottom: 1px solid var(--divider); transition: background 0.15s; }
+.row-base:hover { background: var(--row-hover); }
+.row-expanded { background: var(--row-hover); border-bottom: 1px solid var(--divider); }
+.div-v     { background: var(--divider); width: 1px; height: 24px; flex-shrink: 0; }
+.div-h     { border-top: 1px solid var(--divider); }
+.icon-well { background: rgba(99,102,241,0.12); }
+.icon-well-sm { background: color-mix(in srgb, currentColor 12%, transparent); }
+
+/* ── Link chip (author / social buttons) ── */
+.link-chip {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 10px; font-size: 12px; font-weight: 600;
+  color: var(--text-secondary);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--glass-shadow);
+  backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+  transition: color 0.2s, background 0.2s, border-color 0.2s, box-shadow 0.2s;
+}
+.link-chip:hover {
+  color: var(--text-primary);
+  background: var(--glass-bg-hover);
+  border-color: var(--glass-border-h);
+  box-shadow: var(--glass-shadow-h);
+}
+
+/* ── Table header cell ── */
+.th-cell {
+  padding: 12px 16px; text-align: left;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase;
+  color: var(--text-muted);
+  cursor: pointer; user-select: none;
+  transition: color 0.15s;
+}
+.th-cell:hover { color: var(--text-secondary); }
+.th-cell.active { color: #818cf8; }
+
+/* ── Drop zone idle ── */
+.drop-idle {
+  border: 2px dashed var(--divider);
+  background: transparent;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.drop-idle:hover {
+  border-color: var(--glass-border-h);
+  background: var(--row-hover);
+}
+.drop-scanning {
+  border: 2px dashed rgba(99,102,241,0.35);
+  background: rgba(99,102,241,0.04);
+}
+
+/* ── Ecosystem chip ── */
+.eco-chip {
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  color: var(--text-muted);
+  padding: 3px 12px; border-radius: 99px; font-size: 11px;
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+}
+
+/* ── Pill filter button ── */
+.pill-btn {
+  display: flex; align-items: center; gap: 6px;
+  padding: 6px 12px; border-radius: 8px; font-size: 11px; font-weight: 600;
+  color: var(--text-muted);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+  transition: color 0.2s, background 0.2s, border-color 0.2s;
+}
+.pill-btn:hover { color: var(--text-secondary); background: var(--glass-bg-hover); border-color: var(--glass-border-h); }
+
+/* ── Table count label ── */
+.count-label { font-size: 11px; color: var(--text-dim); }
+
+/* ── Star prompt ── */
+.star-prompt-text  { font-size: 12px; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
+.star-dismiss { color: var(--text-dim); transition: color 0.2s; }
+.star-dismiss:hover { color: var(--text-muted); }
+
+/* ── Footer links ── */
+.footer-link { color: var(--text-dim); transition: color 0.2s; }
+.footer-link:hover { color: var(--text-muted); }
