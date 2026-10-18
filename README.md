@@ -1,70 +1,84 @@
 # VulnScanner
 
-A free, stateless web app that scans dependency manifests for known vulnerabilities and tells you exactly which version to upgrade to.
+> **If this tool is useful to you, please [⭐ star the repo](https://github.com/abdash1994/vuln-scanner) before cloning — it takes one click and helps other developers find it. Thank you.**
 
-Upload a manifest file. Get back every CVE, severity score, whether it's actively exploited, and the fix version — no login, no API keys, no data stored.
+**Free, open-source, stateless dependency vulnerability scanner.**
 
-## Supported file formats
+Drop any manifest file — npm, Maven, PyPI, Go, Rust, Ruby, .NET, PHP — and get back a full vulnerability report with CVSS scores, fix versions, CISA KEV flags, EPSS exploit probability, and one-click upgrade commands. No login. No API keys. No data stored.
 
-| File | Ecosystem |
-|------|-----------|
-| `pom.xml` | Maven (Java) |
-| `package.json` | npm (Node.js) |
-| `requirements.txt` | PyPI (Python) |
-| `go.mod` | Go |
-| `Cargo.toml` | Rust (crates.io) |
+🔗 **Live app:** https://vuln-scanner-phi.vercel.app
+
+---
+
+## Built by
+
+**Aditya Ikram Dash**
+Product Manager · AI Builder · Security Enthusiast
+
+- GitHub: [@abdash1994](https://github.com/abdash1994)
+- LinkedIn: [adityaikramdash](https://www.linkedin.com/in/adityaikramdash)
+- Email: abdash1994@gmail.com
+
+If this tool helped you, consider [starring the repo ⭐](https://github.com/abdash1994/vuln-scanner) — it helps others find it.
+
+---
 
 ## How it works
 
-1. You drop a manifest file — it's parsed **in your browser** and never sent to the server
-2. Only the structured component list (name + version) is POSTed to `/api/scan`
-3. The API route fans out to three free public data sources in parallel:
-   - **[OSV.dev](https://osv.dev)** — vulnerability database covering CVEs and GHSAs across all ecosystems
-   - **[CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog)** — Known Exploited Vulnerabilities catalog (is this actively exploited?)
-   - **[FIRST EPSS](https://www.first.org/epss)** — probability this CVE will be exploited in the next 30 days
-4. Fix versions come from OSV's `affected[].ranges[].events[].fixed` — the same version that OSV marks as no longer affected
+1. **Parse locally** — your manifest is read entirely in the browser. File contents never leave your machine.
+2. **Query OSV** — component list is sent to Google's [OSV.dev](https://osv.dev) batch API for vulnerability matching.
+3. **Enrich with KEV + EPSS** — each CVE is cross-referenced against [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) and [FIRST EPSS](https://www.first.org/epss), both fetched live per scan.
+4. **Prioritise** — results sorted by CVSS severity, then KEV exploitability.
 
-## Results
+All three data sources are public, free, and authoritative. No proprietary data. No Sonatype. No vendor lock-in.
 
-The table shows, for each vulnerability:
+## Data sources
 
-- Component name and current version
-- CVE ID (links to NVD)
-- CVSS severity score and label (Critical / High / Medium / Low)
-- Short description from OSV
-- **Fix version** — the exact version to upgrade to (green if available)
-- **KEV flag** — red badge if this CVE is in CISA's actively-exploited list
-- **EPSS %** — probability of exploitation in the next 30 days
+| Source | Owner | What it provides | Update cadence |
+|--------|-------|------------------|----------------|
+| [OSV.dev](https://osv.dev) | Google Open Source Security | CVE severity, CVSS scores, fix versions | Continuous |
+| [CISA KEV](https://www.cisa.gov/known-exploited-vulnerabilities-catalog) | US Cybersecurity & Infrastructure Security Agency | Confirmed active exploitation | Weekly |
+| [FIRST EPSS](https://www.first.org/epss) | Forum of Incident Response & Security Teams | 30-day exploit probability (ML model) | Daily |
 
-Sortable by severity, component name, CVE ID, or EPSS score. Filterable by name or CVE.
+## Supported manifest formats
 
-## Privacy
-
-Your manifest file content never leaves your browser. Only a list of package names and versions is sent to the server. Nothing is logged or stored.
+| Ecosystem | Files |
+|-----------|-------|
+| npm / Node | `package.json`, `package-lock.json`, `yarn.lock` |
+| Python | `requirements.txt`, `poetry.lock`, `Pipfile.lock`, `pyproject.toml` |
+| Java / JVM | `pom.xml`, `build.gradle`, `build.gradle.kts` |
+| Go | `go.mod`, `go.sum` |
+| Rust | `Cargo.toml`, `Cargo.lock` |
+| Ruby | `Gemfile.lock` |
+| PHP | `composer.lock` |
+| .NET | `*.csproj`, `packages.config`, `packages.lock.json` |
 
 ## Running locally
 
 ```bash
-git clone https://github.com/abdash1994/vuln-scanner
+git clone https://github.com/abdash1994/vuln-scanner.git
 cd vuln-scanner
 npm install
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000).
+Open http://localhost:3000
 
-## Deploying to Vercel
+## Tech stack
 
-```bash
-npx vercel --prod
-```
+- [Next.js 16](https://nextjs.org) — App Router, API routes
+- [Tailwind CSS 4](https://tailwindcss.com) — styling
+- [OSV.dev API](https://google.github.io/osv.dev/api/) — vulnerability data
+- [CISA KEV JSON feed](https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json) — exploitability
+- [FIRST EPSS API](https://www.first.org/epss/api) — exploit probability
+- Deployed on [Vercel](https://vercel.com)
 
-The `vercel.json` sets a 30-second timeout on the scan API route to allow time for the fan-out to external APIs.
+## Privacy
 
-## Stack
+Your manifest file is parsed entirely in the browser using JavaScript. The server only receives a flat list of package names and versions — never file contents, never source code, never paths. There is no database, no account, and nothing stored between sessions.
 
-- **Next.js 16** (App Router)
-- **TypeScript**
-- **Tailwind CSS**
-- **Vercel** (deployment)
-- Zero dependencies beyond Next.js itself — all API calls use native `fetch`
+## License
+
+MIT License — Copyright (c) 2026 Aditya Ikram Dash
+
+See [LICENSE](./LICENSE) for full text. You are free to use, copy, modify, and distribute this software. The copyright notice and this permission notice must be included in all copies or substantial portions of the software.
