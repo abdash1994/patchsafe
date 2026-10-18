@@ -2,7 +2,7 @@
 
 > Know what's vulnerable. Fix it today. Free dependency vulnerability scanner — no login, no API keys, no vendor lock-in.
 
-**[Try it live](https://vuln-scanner-phi.vercel.app)** · [Star the repo ⭐](https://github.com/abdash1994/patchsafe) · Built by [Aditya Ikram Dash](https://www.linkedin.com/in/adityaikramdash)
+**[Try it live](https://patchsafe.vercel.app)** · [Star the repo ⭐](https://github.com/abdash1994/patchsafe) · Built by [Aditya Ikram Dash](https://www.linkedin.com/in/adityaikramdash)
 
 ---
 
@@ -13,7 +13,7 @@ PatchSafe is the second tool in a two-product suite built around the same idea: 
 | Product | What it does | Live at |
 |---------|-------------|---------|
 | [ShipSafe](https://shipsafe-india.vercel.app) | Compliance autopilot for AI-built apps — 39 checks across DPDP, RBI and CERT-In in under 60 seconds | shipsafe-india.vercel.app |
-| **PatchSafe** | Dependency vulnerability scanner — CVSS scores, CISA KEV flags, EPSS exploit probability, and one-command fixes | vuln-scanner-phi.vercel.app |
+| **PatchSafe** | Dependency vulnerability scanner — CVSS scores, CISA KEV flags, EPSS exploit probability, and one-command fixes | patchsafe.vercel.app |
 
 ShipSafe answers: *"Is my app legally compliant before I deploy?"*
 PatchSafe answers: *"Are my dependencies safe before I ship?"*
