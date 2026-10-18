@@ -1,0 +1,8 @@
+{
+  "installCommand": "npm install --registry https://registry.npmjs.org/",
+  "functions": {
+    "app/api/scan/route.ts": {
+      "maxDuration": 30
+    }
+  }
+}
