@@ -21,6 +21,7 @@ export interface OsvVuln {
   aliases?: string[]
   summary?: string
   severity?: Array<{ type: string; score: string }>
+  database_specific?: { severity?: string }
   affected?: Array<{
     ranges?: Array<{
       type: string
