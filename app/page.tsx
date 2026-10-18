@@ -5,6 +5,7 @@ import { FileUpload } from '@/components/FileUpload'
 import { ResultsTable } from '@/components/ResultsTable'
 import { SummaryBar } from '@/components/SummaryBar'
 import { ExportUpgrades } from '@/components/ExportUpgrades'
+import { StarPrompt } from '@/components/StarPrompt'
 import type { Component, VulnResult } from '@/lib/types'
 
 type State = 'idle' | 'scanning' | 'done' | 'error'
@@ -138,6 +139,9 @@ export default function Home() {
             <div className="glass rounded-xl px-4 py-3 text-sm text-red-400 fade-up">{error}</div>
           )}
         </section>
+
+        {/* ── Star prompt — floats bottom-right after results load ── */}
+        {state === 'done' && results.length > 0 && <StarPrompt />}
 
         {/* ── Results ── */}
         {state === 'done' && (
