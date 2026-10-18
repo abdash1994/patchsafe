@@ -6,8 +6,8 @@ const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] })
 const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'VulnScanner — Dependency Vulnerability Checker',
-  description: 'Drop a dependency manifest. Instantly see which packages are vulnerable, the CVE, CVSS score, exploit probability, and the exact fix version.',
+  title: 'PatchSafe — Know What\'s Vulnerable. Fix It Today.',
+  description: 'Drop any dependency manifest. PatchSafe instantly shows which packages are vulnerable, the CVE, CVSS score, exploit probability (EPSS), active exploit flags (CISA KEV), and the exact terminal command to fix it.',
 }
 
 // Injected before React hydrates — prevents flash of wrong theme

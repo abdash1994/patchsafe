@@ -36,7 +36,7 @@ export function StarPrompt() {
         </div>
         <div className="min-w-0">
           <p className="star-prompt-text text-xs font-semibold leading-tight">Found this useful?</p>
-          <a href="https://github.com/abdash1994/vuln-scanner" target="_blank" rel="noopener noreferrer"
+          <a href="https://github.com/abdash1994/patchsafe" target="_blank" rel="noopener noreferrer"
             onClick={dismiss}
             className="text-xs text-yellow-500 hover:text-yellow-400 transition-colors">
             Star the repo on GitHub ↗

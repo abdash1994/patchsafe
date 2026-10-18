@@ -7,7 +7,7 @@
   "homepage": "https://vuln-scanner-phi.vercel.app",
   "repository": {
     "type": "git",
-    "url": "https://github.com/abdash1994/vuln-scanner.git"
+    "url": "https://github.com/abdash1994/patchsafe.git"
   },
   "private": true,
   "scripts": {
